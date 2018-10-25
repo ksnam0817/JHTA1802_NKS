@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	<bean id='data' class='di_autowire.Data'>
+		<constructor-arg index="0" value='a001'/>
+		<constructor-arg index="1" value='1234'/>
+	</bean>
+	<!--  자동 주입을 하지 않는 경우
+	<bean id='byname' class='di_autowire.AutowireByName'>
+		<property name="data" ref='data'/>
+	</bean>
+ 	-->
+ 	<!-- id와 필드명을 사용한 자동 주입을 사용한 경우 -->
+	<bean id='byName' class='di_autowire.AutowireByName'
+	       autowire = "byName" /> 	        
+</beans>

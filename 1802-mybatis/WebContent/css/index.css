@@ -1,0 +1,260 @@
+/* index.css */
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+
+body {
+	background-color: darkolivegreen;
+}
+
+#index {
+	width: 1200px;
+	margin:0 auto;
+}
+
+#index #header {
+	border: 2px solid gray;
+	height: 100px;
+	background-color: #4E120A;
+	margin-bottom: 3px;
+}
+
+#index #header #title {
+	font-family: 'Do Hyeon', sans-serif;
+	color: olive;
+	text-align: center;
+}
+
+#index #topMenu {
+	text-align: center;
+	height: 40px;
+	background-color: #B42300;
+	border: 2px solid gray;
+	margin-bottom: 3px;
+	line-height: 10px;
+}
+#index #topMenu #pageTopMenu ul{
+	margin-bottom: 0;
+}
+
+#index #topMenu #pageTopMenu ul li{
+	display:inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: lightgray;
+}
+
+#index #topMenu #pageTopMenu ul li:hover{
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#index #middle {
+	overflow: hidden;
+	margin-bottom: 3px;
+}
+#index #middle #leftMenu {
+	float: left;
+	width: 200px;
+	min-height: 600px;
+	background-color: #FBB27B;
+	border: 2px solid gray;
+	padding: 10px;
+}
+
+#index #middle #leftMenu ul li:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#index #middle #content {
+	float: right;
+	width: 950px;
+	min-height: 600px;
+	background-color: #FFDAAD;
+	border: 2px solid gray;
+	padding: 10px;
+}
+
+/* insert.jsp */
+#content #insert #attFile {
+	display: none;
+}
+
+#content #insertResult .err {
+	color: red;
+}
+
+#content #insert output {
+	color: blue;
+}
+
+/* list.jsp */
+#content #list #info {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#content #list #search {
+	text-align: right;
+	margin-right: 60px;
+	margin-bottom: 10px;
+}
+
+#content #list #cols, .rows {
+	text-align: center;
+}
+
+#content #list .listHrs {
+	width: 86%;
+}
+
+#content #list #cols > span  {
+	border: 1px solid gray;
+	display:inline-block;
+	text-align: center;
+	font-weight: bold;
+	background-color: olive;
+}
+
+#content #list .rows > .row > span  {
+	border: 1px solid gray;
+	display:inline-block;
+	text-align: center;
+	margin-bottom: 2px;
+	background-color: #FBB27B;
+}
+
+#content #list .rownum {
+	width: 60px;
+	background-color: red;
+}
+
+#content #list .no {
+	width: 60px;
+}
+#content #list .no:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#content #list .writer {
+	width: 120px;
+}
+#content #list .subject {
+	width: 400px;
+}
+#content #list .hit {
+	width: 80px;
+}
+#content #list .mdate {
+	width: 120px;
+}
+
+#content #list #buttons {
+	text-align: center;
+}
+
+#content #list #write {
+	margin-left: 60px;
+	margin-bottom: 10px;
+}
+
+/* view.jsp */
+#view {
+	position:relative;
+	margin-left: 10px;
+}
+#view #pic {
+	position:absolute;
+	right:10px;
+}
+#view #pic label {
+	display:block;
+}
+#view #pic input {
+	width: 180px;
+	display:block;
+}
+#view #inputs label {
+	display: inline-block;
+	width: 66px;
+}
+#view #inputs #doc {
+	overflow: hidden;
+}
+#view #inputs #doc label {
+	float: left;
+}
+#view #inputs #doc textarea {
+	float: left;
+	margin-top: 2px;
+	margin-left: 6px;
+}
+#view #buttons {
+	margin-bottom: 10px;
+}
+
+/* write.jsp */
+#content #write {
+	position:relative;
+	margin-left: 10px;
+}
+#content #write #pic {
+	position:absolute;
+	right:10px;
+}
+#content #write #pic label {
+	display:block;
+}
+#content #write #pic input {
+	width: 180px;
+	display:block;
+}
+#content #write #inputs label {
+	display: inline-block;
+	width: 66px;
+}
+#content #write #inputs #doc {
+	overflow: hidden;
+}
+#content #write #inputs #doc label {
+	float: left;
+}
+#content #write #inputs #doc textarea {
+	float: left;
+	margin-top: 2px;
+	margin-left: 6px;
+}
+#content #write #buttons {
+	margin-bottom: 10px;
+}
+#content #list .nowPage {
+	font-weight: bold;
+	background-color: olive;
+}
+
+/* DynamicSQL - foreach */
+#foreach .dept_list {
+	display: inline-block;
+	width: 180px;
+}
+
+#foreach #result .list {
+	display: inline-block;
+	border: 1px solid olive;
+	width: 220px;
+}
+
+
+/* footer */
+#index #footer {
+	height: 80px;
+	background-color: #B87121;
+	border: 2px solid gray;
+	text-align: center;
+}
+
+#index #footer #pageFooter {
+	line-height: 80px;
+	text-align: center;
+}

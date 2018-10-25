@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop = "http://www.springframework.org/schema/aop"
+       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd ">
+        
+	<bean id='boardDao'  class='aop_aspect.BoardDao'/>
+	<bean id='memberDao' class='aop_aspect.MemberDao'/>
+	<bean id='advice'    class='aop_aspect.Advice' />
+
+	<!-- Spring AOP(aspectj) -->
+	<aop:config>
+		<aop:aspect id='before' ref='advice'>
+			<aop:pointcut expression="execution(* select(..))" 
+							  id="beforePointcut"/>
+			<aop:before method="before" pointcut-ref="beforePointcut"/>
+		</aop:aspect>
+		
+		<aop:aspect id='after' ref='advice'>
+			<aop:pointcut expression="execution(* update(..))" 
+							  id="afterPointcut"/>
+			<aop:after method="after" pointcut-ref="afterPointcut"/>
+		</aop:aspect>
+
+		<aop:aspect id='around' ref='advice'>
+			<aop:pointcut expression="execution(* delete(..))" 
+							  id="aroundPointcut"/>
+			<aop:around method="around" pointcut-ref="aroundPointcut"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

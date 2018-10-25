@@ -1,0 +1,46 @@
+[genuitec-file-id="wc2-19"],[genuitec-lp-path="/1802-spring/WebContent/lib/student.css"],[genuitec-lp-enabled=false]{
+  /* for codelive */
+}
+
+@charset "UTF-8";
+
+/* list ------------------ */
+#list #frm_std{
+	background: #cccccc;
+	border : 1px solid #aaaaaa;
+	padding-top : 1px;
+	padding-bottom : 1px;
+	
+}
+#list #frm_std {
+	overflow      : hidden;
+	margin-bottom : 10px;
+}
+
+#list #frm_std span{
+	float : left;
+}
+
+#list #frm_std #right{
+	float : right;
+}
+
+#list .items{
+	display   : inline-block;
+	width     : 230px;
+	height    : 145px;
+	font-size : 12px;
+	border    : 2px dashed #bbbbbb;
+	vertical-align: top;
+	padding   : 10px;
+	box-sizing: border-box;
+	margin-bottom : 10px;
+	position : relative;
+}
+
+#list .items .photo{
+	position: absolute;
+	top : 5px;
+	right : 5px;
+}
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+	<!-- 한명 검색용 -->
+	<select id="select" parameterType="String" resultType="bean.EmpVo">
+		select employee_id, first_name, phone_number, salary
+		from employees
+		where employee_id = #{_paramter}
+	</select>				
+	
+	<!-- 여러명 검색용 -->
+	<select id='select2' parameterType='String' resultType='bean.EmpVo'>
+		select employee_id, first_name, phone_number, salary
+		from employees
+		where lower(first_name) like lower(#{findStr})
+		    or lower(phone_number) like lower(#{findStr}) 
+	</select>	
+	
+	<!-- 입사년도를 입력받아 해당년에 입사한 직원들을 조회하세요 -->
+	<select id='select_hire' parameterType='String' resultType='bean.EmpVo'>
+		select employee_id, first_name, phone_number, salary, hire_date
+		from employees
+		where TO_CHAR(HIRE_DATE, 'YYYY') = #{_parameter}
+	</select>			
+	
+	<!-- 1. 입사월이 입력된 경우에만 해당 월을 WHERE 검색조건으로 -->
+	<select id='select_hireMonth' parameterType='java.lang.String' resultType='bean.EmpVo'>
+		select employee_id, first_name, phone_number, salary, HIRE_DATE
+		from employees
+		<if test="_parameter != null">
+		where TO_CHAR(hire_date, 'MM') = #{_parameter}
+		</if>
+	</select>			
+	
+	<!-- 2. 사원명과 입사년 -->
+	<select id='select_where' parameterType='bean.WhereVo' resultType='bean.EmpVo'>
+		select employee_id, first_name, phone_number, salary, HIRE_DATE
+		from employees
+		<where>
+		
+			<!-- getFirst_name() -->
+			<if test="first_name != null">
+				lower(first_name) LIKE '%'||lower(#{first_name})||'%'
+			</if>
+			
+			<!-- getHire_year() -->
+			<if test="hire_year != null">
+				AND to_char(hire_date, 'YYYY') = #{hire_year}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 3. Departments -->
+ 	<select id='dept_list' resultType='bean.DeptVo'>
+		select department_id, department_name from departments
+		order by department_name
+	</select>
+	
+	
+	
+	<select id='foreach' parameterType="java.util.List" resultType='bean.EmpVo'>
+		select * from employees
+		<where>
+			department_id in
+			<foreach collection='list' index='index' item='data' open='(' close=')' separator=','>
+				#{data}
+			</foreach>
+		</where>
+		order by first_name		
+	</select>
+</mapper>
+

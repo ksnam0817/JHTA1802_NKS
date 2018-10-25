@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       
+       xmlns:context = "http://www.springframework.org/schema/context"
+       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        ">
+	
+	<context:annotation-config/>
+        
+	<bean id='data' class='di_autowire.Data'>
+		<constructor-arg index="0" value='annotation'/>
+		<constructor-arg index="1" value='12345678'/>
+	</bean>
+	
+ 	<!-- 빈의 유형과 동일한 setter를 찾아 자동 주입 -->
+	<bean id='anno' class='di_autowire.AutowireAnnotation'/> 	        
+</beans>
+
+
+
+
+

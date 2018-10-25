@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="brd">
+	<select id='page_count' parameterType="String" resultType="int">
+		select count(serial) 
+		from   board2 
+		where  worker   like '%${_parameter}%' 
+		or     subject  like '%${_parameter}%'
+		or     content  like '%${_parameter}%'
+	</select>
+
+	<select id='page_count_att' parameterType="String" resultType="int">
+		select  count(serial) 
+		from    board2Att 
+		where   oriAttfile   like '%${_parameter}%' 
+	</select>
+		
+	<select id="select" parameterType="bean.ParamVo" resultType="bean.BoardVo">
+
+		select * from(
+			select rownum rnum , r.*  from
+			(
+				select level , serial, 
+						case when level=1 then subject
+						     when level>1 then  lpad( '└ ',  (7*level)-(level-2) , 
+						           <![CDATA['&emsp;']]>  ) ||subject
+						end subject, 
+						worker, hit, pserial, to_char(mdate, 'yyyy-mm-dd') mdate, 
+				      (select count(*) from board2att where pserial = brd.serial) cnt
+				from board2 brd  
+				where subject like '%${findStr}%' 
+				or    worker  like '%${findStr}%' 
+				or    content like '%${findStr}%'
+				start with pserial is null
+				connect by nocycle prior serial = pserial     
+				order siblings by serial desc
+			)r
+		) where rnum between ${startNo} and ${endNo}
+
+	</select>
+	
+	<select id="select_one" parameterType="int" resultType="bean.BoardVo">
+		select serial, subject, worker, hit, content, pserial, to_char(mdate, 'yyyy-mm-yy') mdate 
+		from board2 
+		where serial = ${_parameter}
+	</select>
+
+
+
+	<select id="select_att" parameterType="int" resultType="bean.BoardAttVo">
+		select * 
+		from   board2Att 
+		where pserial = ${_parameter}
+	</select>
+	
+	<select id="select_att_list" parameterType="bean.ParamVo" resultType="bean.BoardAttVo">
+		select * from(
+			select rownum rnum , s.* from(
+				select * 
+				from    board2Att 
+				where oriAttfile like '%${findStr}%'
+			) s
+		) where rnum between ${startNo} and ${endNo}
+	</select>
+	
+
+	<insert id='insert' parameterType="bean.BoardVo" >
+			insert all
+			into board2
+			 values(seq_board2.nextval, sysdate, #{worker}, #{subject}, 
+			 		#{content}, 0, #{pwd}, null)
+			
+			<foreach collection="attFiles" index="key" item="value" >
+				 into board2Att( serial, pserial, attfile, oriattfile)
+				values( nextSerial(), seq_board2.currval,  #{key},  #{value})
+			</foreach>
+			select * from dual
+			
+	</insert>
+	
+	<update id="hit_up"  parameterType="int">
+		update board2 set hit = hit+1 where serial = ${_parameter}
+	</update>
+	
+	<!--  board2.serial 과 board2Att.pSerial 사이에는 FK가 
+	   on delete cascase 로 설정되어 있음. -->
+	<delete id="deleteR"  parameterType="bean.BoardVo">
+		delete from board2 where serial = ${serial}	 and pwd=#{pwd}
+	</delete>	
+	
+	<!-- 수정 -->
+	<update id="modify" parameterType="bean.BoardVo">
+		update board2 set subject = #{subject} , content = #{content} 
+		where serial = ${serial} and pwd = #{pwd}
+	</update>
+	
+	<delete id="attDelete" parameterType="bean.BoardVo">
+		delete from board2Att
+		<where>
+			attfile in
+			<foreach collection="delFiles" item= 'item'
+					open = "(" close=")" separator=", ">
+				#{item}
+			</foreach>
+		</where> 
+		
+	</delete>
+	
+	<insert id="attInsert" parameterType="bean.BoardVo">
+		insert all
+		<foreach collection="attFiles" index="key" item="value">
+			into board2att(serial, pserial, attfile, oriattfile)
+			values(nextSerial(), #{serial}, #{key} , #{value})
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<!--  답글 처리  -->
+	<insert id='repl' parameterType="bean.BoardVo" >
+		insert all
+			into board2
+		 	values(seq_board2.nextval, sysdate, #{worker}, #{subject}, 
+		 		#{content}, 0, #{pwd}, #{pSerial})
+		
+		<foreach collection="attFiles" index="key" item="value" >
+			 into board2Att( serial, pserial, attfile, oriattfile)
+			values( nextSerial(), seq_board2.currval,  #{key},  #{value})
+		</foreach>
+		select * from dual
+			
+	</insert>	
+	
+	
+	
+
+
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

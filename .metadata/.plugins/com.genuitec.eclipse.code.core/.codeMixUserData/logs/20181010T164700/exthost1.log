@@ -1,0 +1,10 @@
+[2018-10-10 16:47:38.166] [exthost1] [info] extension host started
+[2018-10-10 16:47:38.208] [exthost1] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch {"startup":true,"activationEvent":"*"}
+[2018-10-10 16:47:38.208] [exthost1] [info] ExtensionService#loadCommonJSModule c:\Users\ksnam\.codemix\engine\resources\app\extensions\debug-auto-launch\out\extension
+[2018-10-10 16:47:38.443] [exthost1] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2018-10-10 16:47:38.443] [exthost1] [info] ExtensionService#loadCommonJSModule c:\Users\ksnam\.codemix\engine\resources\app\extensions\emmet\dist\extension
+[2018-10-10 16:47:38.700] [exthost1] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2018-10-10 16:47:38.700] [exthost1] [info] ExtensionService#loadCommonJSModule c:\Users\ksnam\.codemix\engine\resources\app\extensions\merge-conflict\out\extension
+[2018-10-10 16:47:39.694] [exthost1] [info] ExtensionService#_doActivateExtension vscode.search-rg {"startup":true,"activationEvent":"*"}
+[2018-10-10 16:47:39.694] [exthost1] [info] ExtensionService#loadCommonJSModule c:\Users\ksnam\.codemix\engine\resources\app\extensions\search-rg\out\extension
+[2018-10-10 16:47:39.944] [exthost1] [info] eager extensions activated

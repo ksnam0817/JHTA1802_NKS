@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<!-- insert.jsp -->
+	<insert id='insert' parameterType="bean.BoardVo">
+		insert into BOARD(SERIAL, MDATE, ID, PWD, SUBJECT, DOC,
+						   	HIT, GRP, DEEP, ATTFILE, FILEORI)
+							 
+		values(SEQ_BOARD.NEXTVAL, SYSDATE, #{id}, #{pwd}, #{subject}, #{doc},
+							0, SEQ_BOARD.CURRVAL, SEQ_BOARD.CURRVAL, #{attfile}, #{fileOri})
+	</insert>
+	
+	<!-- pageCompute -->
+	<select id='list_count' parameterType='String' resultType='int'>
+		SELECT COUNT(SERIAL) CNT
+		FROM BOARD
+		WHERE 
+						ID 	LIKE '%'||#{findStr}||'%'
+				or	SUBJECT LIKE '%'||#{findStr}||'%'
+				or	DOC		LIKE '%'||#{findStr}||'%'
+	</select>
+	
+	
+	<!-- list.jsp -->
+	<select id='list' parameterType="map" resultType='bean.BoardVo'>
+		SELECT * FROM (
+			SELECT ROWNUM NUM, R.* FROM (
+				SELECT * FROM BOARD WHERE
+					ID LIKE 		#{findStr}
+					or SUBJECT LIKE #{findStr}
+					or DOC LIKE 	#{findStr}
+					order by SERIAL DESC
+			) R
+		) WHERE NUM BETWEEN #{startNo} AND #{endNo}  
+	</select>
+	
+	
+	<!-- view.jsp -->
+	<select id='view' parameterType="int" resultType='bean.BoardVo'>
+			SELECT *
+			FROM BOARD
+			WHERE SERIAL = #{_parameter} 
+	</select>
+	
+	<!-- writeResult.jsp -->
+	<insert id='write' parameterType="bean.BoardVo">
+		insert into BOARD(SERIAL, MDATE, ID, PWD, SUBJECT, DOC,
+						   	HIT, GRP, DEEP, ATTFILE, FILEORI)
+							 
+		values(SEQ_BOARD.NEXTVAL, SYSDATE, #{id}, #{pwd}, #{subject}, #{doc},
+							0, SEQ_BOARD.CURRVAL, SEQ_BOARD.CURRVAL, #{attfile}, #{fileOri})
+	</insert>
+	
+	<!-- modifyResult.jsp -->
+	<update id='modify' parameterType="bean.BoardVo">
+		UPDATE BOARD
+		SET		MDATE 	= SYSDATE,
+				ID 	  	= #{id},
+				PWD	  	= #{pwd},
+				SUBJECT	= #{subject},
+				DOC		= #{doc},
+				ATTFILE	= #{attfile},
+				FILEORI = #{fileOri}
+		WHERE	SERIAL	= #{serial}
+	</update>
+	
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns     = "http://www.springframework.org/schema/beans"
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation =
+		"http://www.springframework.org/schema/beans
+		 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		">
+
+	<!--  bean -->
+	<bean id='brd_dao' class='bean.BoardDao'/>
+	<bean id='brd_myAuth'  class='bean.BrdMyAuthenticator' />
+	
+	<!-- controller -->		
+	<bean id='std_controller' class='bean.BoardController'>
+		<constructor-arg ref='brd_dao'/>
+	</bean>
+	<!-- view resolver -->
+	<bean id='view_resolver'
+		class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
+		
+		<property name="prefix" value='./board/'/>
+		<property name="suffix" value='.jsp'/>
+	</bean>
+
+
+
+
+</beans>

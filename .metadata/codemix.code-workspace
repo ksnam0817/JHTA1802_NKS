@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\portfolio"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\Servers"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\withmun"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\1802_ajax"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\1802_jquery"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\1802-mybatis"
+    },
+    {
+      "path": "C:\\Users\\ksnam\\eclipse-workspace\\1802-spring"
+    }
+  ],
+  "settings": {
+    "javascript.implicitProjectConfig.checkJs": true
+  }
+}
